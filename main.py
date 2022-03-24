@@ -40,7 +40,7 @@ class Hello(Resource):
         )
 
         data = request.get_json()  # status code
-        return jsonify({'data': data}), 201
+        return jsonify({'data': data})
 
 
 # another resource to calculate the square of a number
@@ -56,4 +56,5 @@ api.add_resource(Square, '/square/<int:num>')
 
 # driver function
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run()
