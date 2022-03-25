@@ -23,6 +23,8 @@ class Hello(Resource):
 
     # Corresponds to POST request
     def post(self):
+        data = request.get_json()  # status code
+
         connection = odoolib.get_connection(
             hostname='pujprocnegocio.odoo.com',
             database='pujprocnegocio',
@@ -34,12 +36,11 @@ class Hello(Resource):
 
         partner_model = connection.get_model('res.partner')
         partner = partner_model.create({
-            'name': 'Santiago Nitola',
-            'phone': '311144555',
-            'email': 'nitolita@douglas.com'}
-        )
+            'name': data['name'] + ' ' + data['lastname'],
+            'phone': data['phone'],
+            'email': data['email']
+        })
 
-        data = request.get_json()  # status code
         return jsonify({'data': data})
 
 
